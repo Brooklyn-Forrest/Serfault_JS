@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Serfault</title>
+	<link rel="icon" href="logo-ico.ico" type="image/ico">
+	<script src="jquery-3.4.1.js"></script>
+	<link rel="stylesheet" href="index.css" type="text/css">
+	<script src="index.js"></script>
+</head>
+<body>
+<div id="header_bar">
+	<img src="logomain.PNG" alt="" style="width: 2%; height: 2%;" id="img-logo">
+	<h2 id="title-text">Serfault</h2>
+	<img src="white_options_hamburger.png" alt="" id="img-options">
+</div><!-- No space
+--><div id="sidebar" class="display_none">
+	<div class="highlightdiv"><a href="index.html">Home</a></div>
+	<div class="highlightdiv"><a href="profile.php">Profile</a></div>
+	<div class="highlightdiv"><a href="online.php">Versus</a></div>
+	<div class="highlightdiv"><a href="scoreboards.php">Scoreboards</a></div>
+</div>
+<hr>
+<script>
+    document.getElementById('img-options').addEventListener('click', toggle_vis);
+
+    function toggle_vis() {
+        $('#sidebar').toggleClass("display_none");
+    }
+</script>
+</body>
+</html>
