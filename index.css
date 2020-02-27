@@ -65,3 +65,35 @@ a:hover{
 .display_none{
     display: none !important;
 }
+#game_frame{
+    background-color: darkslategrey;
+}
+
+#menu_frame{
+    height: 415px;
+    width: 500px;
+    border: 2px solid white;
+    color: white;
+    background-color: darkslategrey;
+    vertical-align: top;
+    margin-left: 2.5%;
+}
+
+#board_container{
+    display: inline-block;
+    float: left;
+    width: 414px;
+    height: fit-content;
+    border: 2px solid blue;
+    margin-left: 5%;
+    vertical-align: top;
+}
+
+.tile{
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    border: 1px solid black;
+    padding: 0;
+    vertical-align: top;
+}
