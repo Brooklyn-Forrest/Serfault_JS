@@ -7,6 +7,7 @@
 	<script src="jquery-3.4.1.js"></script>
 	<link rel="stylesheet" href="index.css" type="text/css">
 	<script src="index.js"></script>
+	<script src="board.js"></script>
 </head>
 <body>
 <div id="header_bar">
@@ -21,12 +22,24 @@
 	<div class="highlightdiv"><a href="scoreboards.php">Scoreboards</a></div>
 </div>
 <hr>
+<div style="background-color: darkslategray; max-width: 955px;">
+	<div id="game_frame" style="display: inline-block">
+	</div>
+	<div id="menu_frame" style="display: inline-block">
+		<h3>Main Menu</h3>
+	</div>
+	<div id="pieces_frame" style="display: block; min-height: 150px">
+
+	</div>
+</div>
 <script>
     document.getElementById('img-options').addEventListener('click', toggle_vis);
 
     function toggle_vis() {
         $('#sidebar').toggleClass("display_none");
     }
+	board_frame = document.getElementById('game_frame');
+	generate_board(board_frame);
 </script>
 </body>
 </html>
