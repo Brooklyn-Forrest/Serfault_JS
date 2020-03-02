@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="index.css" type="text/css">
 	<script src="index.js"></script>
 	<script src="board.js"></script>
+	<script src="logic.js"></script>
 </head>
 <body>
 <div id="header_bar">
@@ -27,19 +28,76 @@
 	</div>
 	<div id="menu_frame" style="display: inline-block">
 		<h3>Main Menu</h3>
+		<hr>
+		<i>Game Mode</i><br>
+		<button class="selection_button sel" id="vcom" onclick="switch_selected('Mode', this)">VCom</button>
+		<button class="selection_button" id="2p" onclick="switch_selected('Mode', this)">2P</button>
+		<br><br>
+		<i>Player 1 Color</i><br>
+		<button id="grey_button" class="sel col" onclick="switch_selected('Color', this)">Grey</button>
+		<button id="red_button" class="col" onclick="switch_selected('Color', this)">Red</button>
+		<br><br><br><br>
+		<button onclick="start_game()">Start</button>
 	</div>
 	<div id="pieces_frame" style="display: block; min-height: 150px">
 
 	</div>
 </div>
 <script>
+	// Nav menu
     document.getElementById('img-options').addEventListener('click', toggle_vis);
 
     function toggle_vis() {
         $('#sidebar').toggleClass("display_none");
     }
+
+    // Generate board tiles
 	board_frame = document.getElementById('game_frame');
 	generate_board(board_frame);
+
+	function start_game() {
+	    modes = document.getElementsByClassName('selection_button sel');
+	    console.log(modes[0].innerText);
+	    colors = document.getElementsByClassName('sel col');
+		console.log(colors[0].innerText);
+		mode = colors[0].innerText + modes[0].innerText;
+	    game_inst = new Game(mode);
+	    if(game_inst.status){
+			game_inst.init_game();
+		}
+	    else{
+	        delete game_inst
+		}
+    }
+
+    function switch_selected(group, clicked){
+	    if(group === "Mode"){
+	        var vcomb = document.getElementById('vcom');
+	        var pvp = document.getElementById('2p');
+
+	        if(clicked.id === pvp.id){
+	            vcomb.classList.remove('sel');
+				pvp.classList.add("sel");
+			}
+	        else{
+                vcomb.classList.add('sel');
+                pvp.classList.remove("sel");
+			}
+		}
+	    else{
+			var gb = document.getElementById('grey_button');
+			var rb = document.getElementById('red_button');
+
+            if(clicked.id === gb.id){
+                gb.classList.add("sel");
+                rb.classList.remove("sel");
+            }
+            else{
+                rb.classList.add("sel");
+                gb.classList.remove("sel");
+			}
+		}
+	}
 </script>
 </body>
 </html>
