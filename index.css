@@ -97,3 +97,44 @@ a:hover{
     padding: 0;
     vertical-align: top;
 }
+
+.piece{
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+}
+
+.selection_button{
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+.selection_button:hover, #red_button:hover, #grey_button:hover{
+    color: yellow;
+}
+
+#red_button{
+    background-color: red;
+    color: black;
+    border: none;
+}
+
+#grey_button{
+    color: black;
+    border: none;
+}
+
+button{
+    font-size: 15px;
+    margin-left: 3px;
+    margin-top: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.sel{
+    border: 2px solid yellow !important;
+}
