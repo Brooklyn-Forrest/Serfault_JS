@@ -1,2 +1,2 @@
 # Serfault_JS
-Serfault but in web format.
+A chess-like game with different pieces, different rules, and a larger board.
