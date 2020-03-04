@@ -203,11 +203,71 @@ class Game {
         img_obj.id = type + "_" + color + "_" + item_num;
         if(color === "Grey"){
             // Check for type here
-            img_obj.src = "pawn_placeholder_grey.png"
+            if(type === "Far"){
+                img_obj.src = "pieces/far-grey.png";
+            }
+            else if(type === "FootSolider"){
+                img_obj.src = "pieces/soldier-grey.png";
+            }
+            else if(type === "Rider"){
+                img_obj.src = "pieces/horse-grey.png";
+            }
+            else if(type === "Barricade"){
+                img_obj.src = "pieces/barricade-grey.png";
+            }
+            else if(type === "Ninja"){
+                img_obj.src = "pieces/ninja-grey.png";
+            }
+            else if(type === "Brave"){
+                img_obj.src = "pieces/brave-grey.png";
+            }
+            else if(type === "Divinity"){
+                img_obj.src = "pieces/divinity-grey.png";
+            }
+            else if(type === "Wraith"){
+                img_obj.src = "pieces/wraith-grey.png";
+            }
+            else if(type === "Spinner"){
+                img_obj.src = "pieces/spinnerv2-grey.png";
+            }
+            else{
+                console.log("Type of piece not paired with a recognized case.");
+                img_obj.src = "pawn_placeholder_grey.png";
+            }
         }
         else{
             // Check for type here
-            img_obj.src = "pawn_placeholder_red.png"
+            if(type === "Far"){
+                img_obj.src = "pieces/far-red.png";
+            }
+            else if(type === "FootSolider"){
+                img_obj.src = "pieces/soldier-red.png";
+            }
+            else if(type === "Rider"){
+                img_obj.src = "pieces/horse-red.png";
+            }
+            else if(type === "Barricade"){
+                img_obj.src = "pieces/barricade-red.png";
+            }
+            else if(type === "Ninja"){
+                img_obj.src = "pieces/ninja-red.png";
+            }
+            else if(type === "Brave"){
+                img_obj.src = "pieces/brave-red.png";
+            }
+            else if(type === "Divinity"){
+                img_obj.src = "pieces/divinity-red.png";
+            }
+            else if(type === "Wraith"){
+                img_obj.src = "pieces/wraith-red.png";
+            }
+            else if(type === "Spinner"){
+                img_obj.src = "pieces/spinnerv2-red.png";
+            }
+            else{
+                console.log("Type of piece not paired with a recognized case.");
+                img_obj.src = "pawn_placeholder_red.png";
+            }
         }
         tile.appendChild(img_obj);
     }
