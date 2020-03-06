@@ -11,6 +11,12 @@ spaces = [[[0, 0], 0], [[0, 1], 0], [[0, 2], 0], [[0, 3], 0], [[0, 4], 0], [[0, 
           [[8, 0], 0], [[8, 1], 0], [[8, 2], 0], [[8, 3], 0], [[8, 4], 0], [[8, 5], 0], [[8, 6], 0], [[8, 7], 0], [[8, 8], 0]
     ];
 
+// initial piece selected, if any
+selected_init = 0;
+selected_img = 0;
+
+// reference to index of spaces. [[x,y], z]
+selected_action_space = 0;
 
 class Piece {
 
@@ -161,26 +167,43 @@ class Game {
         }
     }
 
-    select_space(obj_piece, selected_space_abst) {
-        // selected_space_abst (abstract selected values from spaces array) = [[(0), (1)], (1)]
-        let calculated_dist_x = Math.abs(obj_piece.current_pos[0] - selected_space_abst[0][0]);
-        let calculated_dist_y = Math.abs(obj_piece.current_pos[1] - selected_space_abst[0][1]);
-        let total_dist = calculated_dist_x + calculated_dist_y;
-
-        // If z !== 0 (empty) where [x, y], z
-        var result = null;
-        if (selected_space_abst[1] !== 0) {
-            result = this.attack(obj_piece, total_dist)
-        } else {
-            result = this.move(obj_piece, total_dist)
-        }
-
-        if (result) {
-            obj_piece.current_pos = [selected_space_abst[0][0], selected_space_abst[0][1]];
-            spaces[obj_piece.current_pos[0] + obj_piece.current_pos[1]][1] = obj_piece.alias_id;
-            return true;
-        } else {
+    select_space(obj_piece) {
+        if(selected_action_space === 0){
+            // no secondary space selected
+            // highlight spaces that piece can go to?
             return false;
+        }
+        else if(selected_action_space[0] === obj_piece.current_pos){
+            // space selected is current position of piece
+            selected_init = 0;
+            // cancel move
+            return false;
+        }
+        else {
+            // selected_action_space (abstract selected values from spaces array) = [[(0), (1)], (1)]
+            let calculated_dist_x = Math.abs(obj_piece.current_pos[0] - selected_action_space[0][0]);
+            let calculated_dist_y = Math.abs(obj_piece.current_pos[1] - selected_action_space[0][1]);
+            let total_dist = calculated_dist_x + calculated_dist_y;
+
+            // If z !== 0 (empty) where [x, y], z
+            var result = null;
+            if (selected_action_space[1] !== 0) {
+                result = this.attack(obj_piece, total_dist)
+            } else {
+                result = this.move(obj_piece, total_dist)
+            }
+
+            if (result) {
+                obj_piece.current_pos = [selected_action_space[0][0], selected_action_space[0][1]];
+                spaces[obj_piece.current_pos[0] + obj_piece.current_pos[1]][1] = obj_piece;
+                // reset move selection vars
+                selected_init = 0;
+                return true;
+            } else {
+                // reset move selection vars
+                selected_init = 0;
+                return false;
+            }
         }
     }
 
@@ -190,7 +213,7 @@ class Game {
     select_action(obj_piece, tile_value) {
         // [x, y]
         let coordinates = tile_value.split(",");
-        let index = coordinates[0] * 8 + y;
+        let index = coordinates[0] * 8 + coordinates[1];
 
         var selected_space_abst = spaces[index];
         return this.select_space(obj_piece, selected_space_abst);
@@ -324,7 +347,63 @@ class Game {
         this.generate_piece("Wraith", "[1, 6]", this.p2color, 1);
         new Spinner([1, 2]);
         this.generate_piece("Spinner", "[1, 2]", this.p2color, 1);
-        
+    }
+
+    select_tile(id){
+        console.log("Selected tile.");
+        var coordinates = id.split(",");
+        let index = coordinates[0] * 8 + coordinates[1];
+        var test = id.getElementsByTagName('img');
+        if(test[0] && selected_init === 0){
+            // piece in selection and initial selection has not been made yet.
+            selected_init = spaces[index][1];
+            selected_img = test[0];
+            // move step 1: piece to move selected.
+        }
+        else if(selected_init !== 0){
+            selected_action_space = spaces[index];
+        }
+
+        var valid = this.select_space(spaces[index][1]);
+        console.log("Move result: " + valid);
+        if(valid){
+            // execute move
+            if(selected_action_space[1] !== 0) {
+                test[0].remove();
+                // create piece at bottom of board here
+
+                // move initially selected piece to new space
+                selected_action_space[1] = selected_init;
+
+                // copy properties of image
+                var cpy_id = selected_img.id;
+                var cpy_src = selected_img.src;
+                selected_img.remove();
+
+                // recreate image render
+                let reimage = document.createElement('img');
+                reimage.className = "piece";
+                reimage.id = cpy_id;
+                reimage.src = cpy_src;
+                var div = document.getElementById('"'+selected_action_space[0]+'"');
+                div.appendChild(reimage);
+                selected_action_space = 0;
+            }
+        }
+        else{
+            // move wasn't valid, var must be reset
+            // selected_init was already reset at end of select_space function.
+            selected_action_space = 0;
+        }
+    }
+
+    init_interface(){
+        let board = document.getElementById('board_container');
+        let tiles = board.getElementsByTagName('div');
+
+        for(var tile of tiles){
+            tile.addEventListener('click', this.select_tile(tile.id))
+        }
     }
 }
 
