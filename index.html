@@ -6,7 +6,6 @@
 	<link rel="icon" href="logo-ico.ico" type="image/ico">
 	<script src="jquery-3.4.1.js"></script>
 	<link rel="stylesheet" href="index.css" type="text/css">
-	<script src="index.js"></script>
 	<script src="board.js"></script>
 	<script src="logic.js"></script>
 </head>
@@ -64,7 +63,9 @@
 	    game_inst = new Game(mode);
 	    if(game_inst.status){
 			game_inst.init_game();
+			game_active = false;
 			game_inst.init_interface();
+			game_active = true;
 		}
 	    else{
 	        delete game_inst
