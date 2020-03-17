@@ -11,8 +11,6 @@ spaces = [[[0, 0], 0], [[0, 1], 0], [[0, 2], 0], [[0, 3], 0], [[0, 4], 0], [[0, 
           [[8, 0], 0], [[8, 1], 0], [[8, 2], 0], [[8, 3], 0], [[8, 4], 0], [[8, 5], 0], [[8, 6], 0], [[8, 7], 0], [[8, 8], 0]
     ];
 
-spaces_copy = $.extend({}, spaces);
-
 // initial piece selected, if any
 // div?
 var selected_init = 0;
@@ -439,15 +437,6 @@ function wrapper(inst, tile){
     if (game_active){
         inst.select_tile(tile.id)
     }
-}
-
-function reset_game(inst){
-    selected_init = 0;
-    selected_img = 0;
-
-    selected_action_space = 0;
-    spaces = spaces_copy;
-    inst.delete_self();
 }
 
 
