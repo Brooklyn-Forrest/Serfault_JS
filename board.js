@@ -32,30 +32,43 @@ function generate_board(append_frame){
 
 
 class menu_controller{
-    init(state){
+    init() {
         this.menu = document.getElementById('menu_frame');
     }
 
     create_main_menu(){
         this.menu.innerHTML = '';
 
+        var board = document.getElementById('board_container');
+        var images = board.getElementsByTagName('img');
+        while(images.length !== 0){
+            images[0].remove();
+        }
+
         let title_label = document.createElement('h3');
         title_label.innerText = "Main Menu";
         let hr_ele = document.createElement('hr');
         let i_ele = document.createElement('i');
         i_ele.innerText = "Game Mode";
-        let br_ele = document.createElement('br');
+        var br_ele = document.createElement('br');
+        var br_cpy = document.createElement('br');
+        var br_cpy_2 = document.createElement('br');
+        var br_cpy_3 = document.createElement('br');
+        var br_cpy_4 = document.createElement('br');
+        var br_cpy_5 = document.createElement('br');
+        var br_cpy_6 = document.createElement('br');
+        var br_cpy_7 = document.createElement('br');
         let button_ele_vcom = document.createElement('button');
         button_ele_vcom.innerText = "VCom";
         button_ele_vcom.id = "vcom";
         button_ele_vcom.className = 'selection_button sel';
-        button_ele_vcom.onclick = switch_selected('Mode', this);
+        button_ele_vcom.addEventListener('click', function(){ switch_selected('Mode', this)});
 
         let button_ele_2p = document.createElement('button');
         button_ele_2p.innerText = "2P";
         button_ele_2p.id = "2p";
         button_ele_2p.className = 'selection_button';
-        button_ele_2p.onclick = switch_selected('Mode', this);
+        button_ele_2p.addEventListener('click', function(){ switch_selected('Mode', this)});
 
         // br br
         let i_ele_2 = document.createElement('i');
@@ -65,18 +78,18 @@ class menu_controller{
         button_ele_grey.innerText = "Grey";
         button_ele_grey.id = "grey_button";
         button_ele_grey.className = 'col sel';
-        button_ele_grey.onclick = switch_selected('Color', this);
+        button_ele_grey.addEventListener('click', function(){ switch_selected('Color', this)});
 
         let button_ele_red = document.createElement('button');
         button_ele_red.innerText = "Red";
         button_ele_red.id = "red_button";
         button_ele_red.className = 'col';
-        button_ele_red.onclick = switch_selected('Color', this);
+        button_ele_red.addEventListener('click', function(){ switch_selected('Color', this)});
         // br br br br br
 
         let start_button = document.createElement('button');
         start_button.innerText = "Start";
-        start_button.onclick = start_game();
+        start_button.onclick = start_game;
 
         // append children
         this.menu.appendChild(title_label);
@@ -85,15 +98,16 @@ class menu_controller{
         this.menu.appendChild(br_ele);
         this.menu.appendChild(button_ele_vcom);
         this.menu.appendChild(button_ele_2p);
-        this.menu.appendChild(br_ele);
-        this.menu.appendChild(br_ele);
+        this.menu.appendChild(br_cpy);
+        this.menu.appendChild(br_cpy_2);
         this.menu.appendChild(i_ele_2);
+        this.menu.appendChild(br_cpy_3);
         this.menu.appendChild(button_ele_grey);
         this.menu.appendChild(button_ele_red);
-        this.menu.appendChild(br_ele);
-        this.menu.appendChild(br_ele);
-        this.menu.appendChild(br_ele);
-        this.menu.appendChild(br_ele);
+        this.menu.appendChild(br_cpy_4);
+        this.menu.appendChild(br_cpy_5);
+        this.menu.appendChild(br_cpy_5);
+        this.menu.appendChild(br_cpy_6);
         this.menu.appendChild(start_button);
     }
 
@@ -105,7 +119,20 @@ class menu_controller{
         let hr_ele = document.createElement('hr');
         let i_ele = document.createElement('i');
         i_ele.innerText = "Pieces Taken";
-        let br_ele = document.createElement('br');
+        var br_ele = document.createElement('br');
+        var br_cpy = document.createElement('br');
+        var br_cpy_2 = document.createElement('br');
+        var br_cpy_3 = document.createElement('br');
+        var br_cpy_4 = document.createElement('br');
+        var br_cpy_5 = document.createElement('br');
+        var br_cpy_6 = document.createElement('br');
+        var br_cpy_7 = document.createElement('br');
+
+        let p1div = document.createElement('div');
+        p1div.id = "p1div";
+
+        let p2div = document.createElement('div');
+        p2div.id = "p2div";
 
         let i_label = document.createElement('i');
         i_label.innerText = "Player 1";
@@ -123,7 +150,29 @@ class menu_controller{
         let end_b = document.createElement('button');
         end_b.innerText = "End Game";
         end_b.id = "e_button";
-        end_b.onclick = reset_game();
+        end_b.onclick = reset_game;
+
+        this.menu.appendChild(title_label);
+        this.menu.appendChild(hr_ele);
+        this.menu.appendChild(br_ele);
+        this.menu.appendChild(i_ele);
+        this.menu.appendChild(br_cpy);
+        this.menu.appendChild(br_cpy_2);
+        this.menu.appendChild(p1div);
+        this.menu.appendChild(p2div);
+        p1div.appendChild(i_label);
+        p2div.appendChild(i_label_2);
+        p1div.appendChild(br_ele);
+        p2div.appendChild(br_cpy_5);
+        p1div.appendChild(b_tally_1);
+        p2div.appendChild(b_tally_2);
+        p1div.appendChild(br_cpy_3);
+        p2div.appendChild(br_cpy_4);
+
+        this.menu.appendChild(br_cpy_6);
+        this.menu.appendChild(br_cpy_7);
+
+        this.menu.appendChild(end_b);
     }
 
     create_settings_menu(){
