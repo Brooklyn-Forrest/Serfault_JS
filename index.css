@@ -138,3 +138,8 @@ button{
 .sel{
     border: 2px solid yellow !important;
 }
+
+#p1div, #p2div{
+    display: inline-block;
+    padding: 10px;
+}
