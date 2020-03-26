@@ -147,6 +147,10 @@ class menu_controller{
         b_tally_2.innerText = "0";
         b_tally_2.id = "p2tally";
 
+        let turn = document.createElement('h4');
+        turn.innerText = "It is P1's turn.";
+        turn.id = "turn";
+
         let end_b = document.createElement('button');
         end_b.innerText = "End Game";
         end_b.id = "e_button";
@@ -169,6 +173,7 @@ class menu_controller{
         p1div.appendChild(br_cpy_3);
         p2div.appendChild(br_cpy_4);
 
+        this.menu.appendChild(turn);
         this.menu.appendChild(br_cpy_6);
         this.menu.appendChild(br_cpy_7);
 
