@@ -377,6 +377,15 @@ class Game {
             // execute move
             if(selected_action_space[1] !== 0) {
                 test[0].remove();
+                var tally = "";
+                if(selected_init.player === "p1"){
+                    tally = document.getElementById('p1tally');
+                }
+                else{
+                    tally = document.getElementById('p2tally');
+                }
+                var listed_total = tally.innerText;
+                tally.innerText = parseInt(listed_total) + 1;
                 // create piece at bottom of board here
             }
 
@@ -407,11 +416,14 @@ class Game {
             selected_action_space = 0;
 
             // switch turns
+            let turntext = document.getElementById('turn');
             if(this.turn === "p1"){
                 this.turn = "p2";
+                turntext.innerText = "It is P2's turn.";
             }
             else{
                 this.turn = "p1";
+                turntext.innerText = "It is P1's turn.";
             }
         }
         else{
