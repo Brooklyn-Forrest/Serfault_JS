@@ -371,7 +371,7 @@ class Game {
             selected_action_space = spaces[index];
         }
 
-        var valid = this.select_space(spaces[index][1]);
+        var valid = this.select_space(selected_init);
         console.log("Move result: " + valid);
         if(valid){
             // execute move
